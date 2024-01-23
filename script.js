@@ -71,7 +71,7 @@ function game(){
     let result = '';
     let playerWins = 0;
     let compWins = 0;
-    while( rounds < 3){
+    while( rounds < 5){
         result = playRound();
         if(result == 'player'){
             playerWins++ ;
