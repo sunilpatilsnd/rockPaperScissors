@@ -21,7 +21,7 @@ function getPlayerChoice(){
         alert(`This is a Rock, Paper or Scissors game you need to enter correct input`);
         return getPlayerChoice();             
     }
-    playerChoice = playerChoice.toLowerCase(); 
+    playerChoice = playerChoice.toLowerCase().trim(); 
     if(playerChoice == 'rock' || playerChoice == 'paper' || playerChoice == 'scissors'){
         //console.log(playerChoice);
         return playerChoice;
@@ -71,7 +71,7 @@ function game(){
     let result = '';
     let playerWins = 0;
     let compWins = 0;
-    while( rounds < 5){
+    while( rounds < 5 ){
         result = playRound();
         if(result == 'player'){
             playerWins++ ;
