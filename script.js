@@ -15,57 +15,81 @@ function getComputerChoice(){
    }    
 }
 
-function playRound(playerSelection , computerSelection ){
-    // console.log(playerSelection , computerSelection +'inside playround')
-    if(playerSelection == computerSelection ){
-        return('It\'s a Draw');        
-    }
-    else if(playerSelection == 'rock' && computerSelection == 'paper'){
-        return ('You lose this round');
-    }
-    else if(playerSelection == 'rock' && computerSelection == 'scissors'){
-        return ('You Win this round');
-    }
-    else if(playerSelection == 'paper' && computerSelection == 'scissors'){
-        return ('You lose this round');
-    }
-    else if(playerSelection == 'paper' && computerSelection == 'rock'){
-        return('You Win this round');
-    }
-    else if( playerSelection == 'scissors' && computerSelection == 'rock'){
-        return ('You lose this round');
-    }
-    else if( playerSelection == 'scissors' && computerSelection == 'paper' ){
-        return ('You Win this round');
-    }
-}
-
 function getPlayerChoice(){
-    let playerChoice = prompt('Enter your choice rock or paper or scisssors').toLowerCase() ;
-    
+    let playerChoice = prompt('Enter your choice rock or paper or scisssors');
+    if(playerChoice == null){
+        alert(`This is a Rock, Paper or Scissors game you need to enter correct input`);
+        return getPlayerChoice();             
+    }
+    playerChoice = playerChoice.toLowerCase(); 
     if(playerChoice == 'rock' || playerChoice == 'paper' || playerChoice == 'scissors'){
         //console.log(playerChoice);
         return playerChoice;
     }
-    
     else {
-        alert(`Enter correct choice`);
-        getPlayerChoice();
+        alert(`Enter correct choice Rock, Paper or Scissors`);
+        return getPlayerChoice();
     }
 }
 
-function playMatch(){
+function getWinner(playerSelection , computerSelection ){
+    // console.log(playerSelection , computerSelection +'inside playround')
+    if(playerSelection == computerSelection ){
+        return('None');        
+    }
+    else if(playerSelection == 'rock' && computerSelection == 'paper'){
+        return ('computer');
+    }
+    else if(playerSelection == 'rock' && computerSelection == 'scissors'){
+        return ('player');
+    }
+    else if(playerSelection == 'paper' && computerSelection == 'scissors'){
+        return ('computer');
+    }
+    else if(playerSelection == 'paper' && computerSelection == 'rock'){
+        return('player');
+    }
+    else if( playerSelection == 'scissors' && computerSelection == 'rock'){
+        return ('computer');
+    }
+    else if( playerSelection == 'scissors' && computerSelection == 'paper' ){
+        return ('player');
+    }
+}
+
+function playRound(){
     let a = getPlayerChoice();
-    let b = getComputerChoice();
-    
+    let b = getComputerChoice();       
+    let result = getWinner(a,b);  
     console.log(`Your Choice Was ${a} and Computer choice was ${b}`);
-    if(a == undefined){
-        a = getPlayerChoice()    
-    }
-    
-    let result = playRound(a,b);
-
-    
-    console.log(result);  
+    console.log(`Winner of this round is ${result}`);  
+    return result;
 }
 
+function game(){
+    let rounds = 0;
+    let result = '';
+    let playerWins = 0;
+    let compWins = 0;
+    while( rounds < 3){
+        result = playRound();
+        if(result == 'player'){
+            playerWins++ ;
+        }
+        else if(result == 'computer'){
+            compWins++ ;
+        }
+        else{
+            rounds-- ; 
+            // console.log(rounds+'when no one won');
+        }
+        rounds++ ;
+        // console.log(rounds);
+    }    
+    if(playerWins > compWins){
+        return(`Plyer Won this game by ${playerWins - compWins} ${playerWins - compWins > 1 ? 'rounds' : 'round'}`);
+    }
+    else if(playerWins < compWins){
+        return(`Computer Won this game by  ${compWins - playerWins}  ${compWins - playerWins > 1 ? 'rounds' : 'round'}`)
+    }
+}
