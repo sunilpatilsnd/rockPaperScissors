@@ -61,8 +61,8 @@ function playRound(){
     let a = getPlayerChoice();
     let b = getComputerChoice();       
     let result = getWinner(a,b);  
-    console.log(`Your Choice Was ${a} and Computer choice was ${b}`);
-    console.log(`Winner of this round is ${result}`);  
+    alert (`Your Choice Was ${a} and Computer choice was ${b}
+            Winner of this round is ${result}`);  
     return result;
 }
 
@@ -87,9 +87,15 @@ function game(){
         // console.log(rounds);
     }    
     if(playerWins > compWins){
-        return(`Plyer Won this game by ${playerWins - compWins} ${playerWins - compWins > 1 ? 'rounds' : 'round'}`);
+        return(`Player Won this game by ${playerWins - compWins} ${playerWins - compWins > 1 ? 'rounds' : 'round'}
+                Playerscore: ${playerWins}
+                ComputerScore: ${compWins}`);
     }
     else if(playerWins < compWins){
-        return(`Computer Won this game by  ${compWins - playerWins}  ${compWins - playerWins > 1 ? 'rounds' : 'round'}`)
+        return(`Computer Won this game by  ${compWins - playerWins}  ${compWins - playerWins > 1 ? 'rounds' : 'round'}
+        Playerscore: ${playerWins}
+        ComputerScore: ${compWins}`)
     }
 }
+
+alert(game());
