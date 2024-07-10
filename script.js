@@ -57,12 +57,12 @@ function getWinner(playerSelection , computerSelection ){
     }
 }
 
-function playRound(){
-    let a = getPlayerChoice();
-    let b = getComputerChoice();       
-    let result = getWinner(a,b);  
-    alert (`Your Choice Was ${a} and Computer choice was ${b}
-            Winner of this round is ${result}`);  
+function playRound(playerChoice){    
+    let compChoice = getComputerChoice();       
+    let result = getWinner(playerChoice,compChoice);
+    const resultTxt =   `Your Choice Was ${playerChoice.toUpperCase()} and Computer choice was ${compChoice.toUpperCase()} 
+        Winner of this round is ${result.toUpperCase()}`;  
+    showResultUI(resultTxt);
     return result;
 }
 
@@ -98,4 +98,28 @@ function game(){
     }
 }
 
-alert(game());
+
+function startGame(){
+    let choices = ['rock','paper','scissors'];
+    const gameContainer = document.querySelector('#startGame');
+    const gameBtn = document.querySelector('#gameBtn');
+    
+    for (let i= 0; i < choices.length; i++){
+        const container = document.querySelector('#game');
+        const content = document.createElement('button');        
+        content.id = choices[i];        
+        content.textContent =choices[i].toUpperCase();
+        container.appendChild(content);
+        content.setAttribute("onclick", `playRound('${content.id}')`);
+        
+    }
+    gameContainer.removeChild(gameBtn);
+}
+// alert(game());
+
+function showResultUI(resultTxt){
+    const container = document.querySelector('#game');
+    const content = document.createElement('p');
+    content.textContent = resultTxt;
+    container.appendChild(content);
+}
