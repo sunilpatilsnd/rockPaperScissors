@@ -1,3 +1,7 @@
+let playerWins = 0;
+let compWins = 0;
+let draws = 0 ;
+
 function getComputerChoice(){
     const computerChoice = '';
     let randNum ;
@@ -35,7 +39,7 @@ function getPlayerChoice(){
 function getWinner(playerSelection , computerSelection ){
     // console.log(playerSelection , computerSelection +'inside playround')
     if(playerSelection == computerSelection ){
-        return('None');        
+        return('No One');        
     }
     else if(playerSelection == 'rock' && computerSelection == 'paper'){
         return ('computer');
@@ -57,12 +61,37 @@ function getWinner(playerSelection , computerSelection ){
     }
 }
 
+
+
 function playRound(playerChoice){    
     let compChoice = getComputerChoice();       
     let result = getWinner(playerChoice,compChoice);
+    
+    
     const resultTxt =   `Your Choice Was ${playerChoice.toUpperCase()} and Computer choice was ${compChoice.toUpperCase()} 
         Winner of this round is ${result.toUpperCase()}`;  
     showResultUI(resultTxt);
+    
+    
+    if(result == 'player'){
+        playerWins++;
+    
+    }
+    else if(result == 'computer'){
+        compWins++;
+    }
+    else {
+        draws++;
+    }    
+    
+    if(playerWins == 5){
+        
+    }
+    else if(compWins == 5){
+
+    }
+
+
     return result;
 }
 
@@ -101,14 +130,18 @@ function game(){
 
 function startGame(){
     let choices = ['rock','paper','scissors'];
+    let icons = ['🪨', '📃', '✂'];
+    
     const gameContainer = document.querySelector('#startGame');
     const gameBtn = document.querySelector('#gameBtn');
     
     for (let i= 0; i < choices.length; i++){
         const container = document.querySelector('#game');
-        const content = document.createElement('button');        
+        const content = document.createElement('button'); 
+
         content.id = choices[i];        
-        content.textContent =choices[i].toUpperCase();
+        content.textContent =icons[i].toUpperCase();
+
         container.appendChild(content);
         content.setAttribute("onclick", `playRound('${content.id}')`);
         
@@ -117,9 +150,18 @@ function startGame(){
 }
 // alert(game());
 
-function showResultUI(resultTxt){
-    const container = document.querySelector('#game');
-    const content = document.createElement('p');
-    content.textContent = resultTxt;
-    container.appendChild(content);
+function showResultUI(resultTxt){    
+    const container = document.querySelector('#gameResult');    
+    const content = document.querySelector('#result');    
+    content.textContent = resultTxt;    
+    container.replaceChild(content , content);    
+}
+
+function finalResultUI(){
+    const container = document.querySelector('#gameResult');
+}
+
+function resetGame(){
+    const container = document.querySelector('button');
+    console.log(typeof container)
 }
