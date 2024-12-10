@@ -1,3 +1,4 @@
+
 let playerWins = 0;
 let compWins = 0;
 let draws = 0 ;
@@ -68,9 +69,9 @@ function playRound(playerChoice){
     let result = getWinner(playerChoice,compChoice);
     
     
-    const resultTxt =   `Your Choice Was ${playerChoice.toUpperCase()} and Computer choice was ${compChoice.toUpperCase()} 
-        Winner of this round is ${result.toUpperCase()}`;  
-    showResultUI(resultTxt);
+    const resultTxt =   `Your chose ${playerChoice.toUpperCase()} and Computer chose ${compChoice.toUpperCase()} 
+        ${result.toUpperCase()} Won!`;  
+    showResultUI (playerWins, resultTxt);
     
     
     if(result == 'player'){
@@ -130,7 +131,7 @@ function game(){
 
 function startGame(){
     let choices = ['rock','paper','scissors'];
-    let icons = ['🪨', '📃', '✂'];
+    // let icons = ['🪨', '📃', '✂'];
     
     const gameContainer = document.querySelector('#startGame');
     const gameBtn = document.querySelector('#gameBtn');
@@ -140,28 +141,34 @@ function startGame(){
         const content = document.createElement('button'); 
 
         content.id = choices[i];        
-        content.textContent =icons[i].toUpperCase();
+        content.textContent = choices[i].toLowerCase(); //icons[i].toUpperCase();
 
         container.appendChild(content);
-        content.setAttribute("onclick", `playRound('${content.id}')`);
+        content.addEventListener('click' ,() => {            
+            playRound(choices[i]);
+        });
         
     }
     gameContainer.removeChild(gameBtn);
 }
 // alert(game());
 
-function showResultUI(resultTxt){    
+function showResultUI(playersScore, resultTxt){    
     const container = document.querySelector('#gameResult');    
-    const content = document.querySelector('#result');    
-    content.textContent = resultTxt;    
-    container.replaceChild(content , content);    
+    const content = document.querySelector('#result');
+    const roundResult = document.querySelector('#roundResult');
+    const score = document.createElement('span');
+    
+    roundResult.textContent = resultTxt;
+    content.textContent = `Player Score: `;
+    score.textContent = playersScore ;
+    content.appendChild(score);
+    container.replaceChild(content, content );
+
 }
 
 function finalResultUI(){
     const container = document.querySelector('#gameResult');
 }
 
-function resetGame(){
-    const container = document.querySelector('button');
-    console.log(typeof container)
-}
+
