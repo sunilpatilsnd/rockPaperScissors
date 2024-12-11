@@ -69,31 +69,29 @@ function playRound(playerChoice){
     let result = getWinner(playerChoice,compChoice);
     
     
-    const resultTxt =   `Your chose ${playerChoice.toUpperCase()} and Computer chose ${compChoice.toUpperCase()} 
-        ${result.toUpperCase()} Won!`;  
-    showResultUI (playerWins, resultTxt);
-    
-    
-    if(result == 'player'){
-        playerWins++;
-    
-    }
-    else if(result == 'computer'){
-        compWins++;
-    }
-    else {
-        draws++;
-    }    
-    
-    if(playerWins == 5){
-        
-    }
-    else if(compWins == 5){
-
+    let resultTxt =   `You chose ${playerChoice.toUpperCase()} and Computer chose ${compChoice.toUpperCase()}...${result} Won!`;  
+      
+    switch(result){
+        case 'player':
+            playerWins++ ;
+        break;
+        case 'computer':
+            compWins++ ;
+        break;
+        default:
+            draws++ ;
     }
 
+    if(playerWins == 5){        
+        resetGame();        
+    }
+    else if(compWins == 5){        
+        resetGame();        
+    }
 
-    return result;
+    showResults(playerWins,compWins,draws, resultTxt) ; 
+    
+    
 }
 
 function game(){
@@ -129,46 +127,43 @@ function game(){
 }
 
 
-function startGame(){
-    let choices = ['rock','paper','scissors'];
-    // let icons = ['🪨', '📃', '✂'];
-    
-    const gameContainer = document.querySelector('#startGame');
-    const gameBtn = document.querySelector('#gameBtn');
-    
-    for (let i= 0; i < choices.length; i++){
-        const container = document.querySelector('#game');
-        const content = document.createElement('button'); 
+function startGame(){    
+    const playerChoices = document.querySelectorAll('.btn');    
 
-        content.id = choices[i];        
-        content.textContent = choices[i].toLowerCase(); //icons[i].toUpperCase();
-
-        container.appendChild(content);
-        content.addEventListener('click' ,() => {            
-            playRound(choices[i]);
-        });
-        
-    }
-    gameContainer.removeChild(gameBtn);
+    playerChoices.forEach((btn) =>{
+        btn.addEventListener('click',(event) =>{            
+            playRound(event.target.id);            
+        })
+    });   
+    
 }
 // alert(game());
 
-function showResultUI(playersScore, resultTxt){    
+function showResults(playersScore,compScore,drawScore, resultTxt){    
     const container = document.querySelector('#gameResult');    
-    const content = document.querySelector('#result');
+    const content = document.querySelector('#roundResult');
+
+    const pScore = document.querySelector('#playerscore');
+    const cScore = document.querySelector('#computerscore');
+    const draws = document.querySelector('#draws');
+
     const roundResult = document.querySelector('#roundResult');
-    const score = document.createElement('span');
     
-    roundResult.textContent = resultTxt;
-    content.textContent = `Player Score: `;
-    score.textContent = playersScore ;
-    content.appendChild(score);
-    container.replaceChild(content, content );
+    pScore.textContent = playersScore;
+    cScore.textContent = compScore;
+    draws.textContent = drawScore;
+
+    roundResult.textContent = resultTxt;    
+    
+    container.replaceChild(content, content);
 
 }
 
-function finalResultUI(){
-    const container = document.querySelector('#gameResult');
+function resetGame(resultTxt){
+    playerWins = 0;
+    compWins = 0;
+    draws = 0;
 }
 
 
+startGame();
