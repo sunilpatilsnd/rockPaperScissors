@@ -83,13 +83,14 @@ function playRound(playerChoice){
     }
 
     if(playerWins == 5){        
-        resetGame();        
+        showFinalResult('You');   
+           
     }
-    else if(compWins == 5){        
-        resetGame();        
+    else if(compWins == 5){         
+        showFinalResult('Computer');
     }
 
-    showResults(playerWins,compWins,draws, resultTxt) ; 
+    updateResults(playerWins,compWins,draws, resultTxt) ; 
     
     
 }
@@ -132,14 +133,14 @@ function startGame(){
 
     playerChoices.forEach((btn) =>{
         btn.addEventListener('click',(event) =>{            
-            playRound(event.target.id);            
+            playRound(event.target.id);     
+                   
         })
-    });   
-    
+    });       
 }
 // alert(game());
 
-function showResults(playersScore,compScore,drawScore, resultTxt){    
+function updateResults(playersScore,compScore,drawScore, resultTxt){    
     const container = document.querySelector('#gameResult');    
     const content = document.querySelector('#roundResult');
 
@@ -159,11 +160,52 @@ function showResults(playersScore,compScore,drawScore, resultTxt){
 
 }
 
-function resetGame(resultTxt){
+function resetGame(){
     playerWins = 0;
     compWins = 0;
     draws = 0;
+
+    const pScore = document.querySelector('#playerscore');
+    const cScore = document.querySelector('#computerscore');
+    const draw = document.querySelector('#draws');
+
+    pScore.textContent = 0;
+    cScore.textContent = 0;
+    draw.textContent = 0;
+
+    const reset = document.querySelector('#reset');
+    const result = document.querySelector('#finResultText');
+
+    debugger
+    reset.remove();
+    result.remove();
+}
+
+function showFinalResult(winnner){
+    const container = document.querySelector('#gameResult');
+    const finResult = document.querySelector('#finalResult');
+    
+    const content = document.createElement('h2');
+    const reset = document.createElement('button');
+
+    reset.textContent = 'Reset';
+    reset.id = 'reset';
+    content.id = 'finResultText';
+
+    reset.addEventListener('click', () => {
+        resetGame();
+        startGame();
+    });
+
+    content.textContent = `${winnner} Won the game!`;
+
+    finResult.appendChild(content);
+    finResult.appendChild(reset);
+
+    container.replaceChild(finResult, finResult);
 }
 
 
+
 startGame();
+
