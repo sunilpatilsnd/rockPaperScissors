@@ -69,7 +69,7 @@ function playRound(playerChoice){
     let result = getWinner(playerChoice,compChoice);
     
     
-    let resultTxt =   `You chose ${playerChoice.toUpperCase()} and Computer chose ${compChoice.toUpperCase()}...${result} Won!`;  
+    let resultTxt =   `You chose ${playerChoice} and computer chose ${compChoice}...${result} won!`;  
       
     switch(result){
         case 'player':
