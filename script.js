@@ -175,7 +175,7 @@ function resetGame(){
     const cScore = document.querySelector('#computerscore');
     const draw = document.querySelector('#draws');
 
-    const game = document.querySelector('#Game');
+    const game = document.querySelector('#game');
 
     const finalResult = document.querySelector('#finalResult');
 
@@ -194,14 +194,14 @@ function showFinalResult(winnner){
     const content = document.querySelector('#finResultText');
     const reset = document.querySelector('#reset');
 
-    const game = document.querySelector('#Game');
+    const game = document.querySelector('#game');
 
     reset.textContent = 'Reset';
     reset.id = 'reset';
     content.id = 'finResultText';
     
     
-    reset.textContent = 'Reset';
+    reset.textContent = '↺';
     content.textContent = `${winnner} Won the game!`;
 
     finalResult.classList.toggle('hide');    //show results 
