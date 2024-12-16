@@ -3,7 +3,7 @@ body{
     background-color: #13293D;
     color: #fff;
     margin: 2em auto;
-    padding: 20px;
+    
     border: 5px solid #fff;
     border-radius: 20px;
     max-width: 50em;
@@ -40,9 +40,16 @@ button{
 #game button:hover{
     background-color: #414243;
 }
-h1 {
+.card-header {
     font-size: 40px;
+    background-color: #414243;
+    margin: 0px;
+    padding: 1em 1em;
+    border-top-right-radius: 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
     margin-bottom: 1em;
+    border-bottom: 1px solid;
 }
 #startGame{
     padding: 3em 2em;
