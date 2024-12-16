@@ -130,13 +130,19 @@ function game(){
 
 function startGame(){    
     const playerChoices = document.querySelectorAll('.btn');    
+    const reset = document.querySelector('#reset');
 
     playerChoices.forEach((btn) =>{
         btn.addEventListener('click',(event) =>{            
             playRound(event.target.id);     
                    
         })
-    });       
+    });     
+    
+    reset.addEventListener('click', () => {
+        resetGame();
+    });
+
 }
 // alert(game());
 
@@ -169,40 +175,45 @@ function resetGame(){
     const cScore = document.querySelector('#computerscore');
     const draw = document.querySelector('#draws');
 
+    const game = document.querySelector('#Game');
+
+    const finalResult = document.querySelector('#finalResult');
+
     pScore.textContent = 0;
     cScore.textContent = 0;
     draw.textContent = 0;
-
-    const reset = document.querySelector('#reset');
-    const result = document.querySelector('#finResultText');
-
-    debugger
-    reset.remove();
-    result.remove();
+    //  debugger
+    finalResult.classList.toggle('hide');
+    game.classList.toggle('disable');    
 }
 
 function showFinalResult(winnner){
     const container = document.querySelector('#gameResult');
     const finResult = document.querySelector('#finalResult');
     
-    const content = document.createElement('h2');
-    const reset = document.createElement('button');
+    const content = document.querySelector('#finResultText');
+    const reset = document.querySelector('#reset');
+
+    const game = document.querySelector('#Game');
 
     reset.textContent = 'Reset';
     reset.id = 'reset';
     content.id = 'finResultText';
-
-    reset.addEventListener('click', () => {
-        resetGame();
-        startGame();
-    });
-
+    
+    
+    reset.textContent = 'Reset';
     content.textContent = `${winnner} Won the game!`;
 
-    finResult.appendChild(content);
-    finResult.appendChild(reset);
+    finalResult.classList.toggle('hide');    //show results 
+    game.classList.toggle('disable');   //disable playing game before reset;
 
-    container.replaceChild(finResult, finResult);
+    
+
+    // finResult.appendChild(content);
+    // finResult.appendChild(reset);
+
+    // container.replaceChild(finResult, finResult);
+    
 }
 
 

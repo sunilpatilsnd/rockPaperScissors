@@ -29,3 +29,14 @@ h1 {
 #startGame{
     padding: 3em 2em;
 }
+
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}
+
+.disable{
+    pointer-events: none;
+}
